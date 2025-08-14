@@ -1,0 +1,176 @@
+body {
+    font-family: "Poppin", sans-serif;
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book {
+    position: absolute;
+    width:500px;
+    height: 650px; 
+    background-color:white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.4), inset 300px 0 50px rgba(0, 0, 0, 0.4);
+    transform: perspective(2000px) rotateZ(0);
+    transform: translateX(-10%);
+    transform-style: preserve-3d;
+    transition: all 1s ease;
+}
+
+input {
+    display: none;
+}
+
+.cover, .back-cover {
+    background-color: #FDFD96;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 15px 15px 0;
+    /* box-shadow: 0 0 5px rgb(41, 41, 41); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center left;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.4), inset 20px 0 50px rgba(0, 0, 0, 0.4);
+}
+
+.cover {
+    position: absolute;
+    z-index: 11;
+    transition: transform 1s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transform-origin: left;
+    transition: all 1s ease;
+}
+
+.cover label {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.cover img{
+    position: absolute;
+    top:0; 
+    left:0; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.back-cover {
+    position: relative;
+    z-index: -1;
+}
+
+.page {
+    position: absolute;
+    background-color: white;
+    width: 485px;
+    height: 630px;
+    border-radius: 0 15px 15px 0;
+    margin-top: 10px;
+    transform-origin: left;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition-duration: 1.5s;
+}
+
+.page img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px 0 0 15px;
+}
+
+.front-page {
+    position: absolute;
+    background-color: #FDFD96;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    padding: 2rem;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.4), inset 20px 0 50px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.front-page h3 {
+    color: #333;
+    margin-bottom: 0.8px;
+    align-items: center;
+    object-fit: cover;
+}
+
+.back-page {
+    transform: rotateY(180deg);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 1rem;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.4), inset 20px 0 50px rgba(0, 0, 0, 0.4);
+    z-index: 99;
+}
+
+.back-page img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+    border-radius: 10px; 
+}
+
+.next, .prev {
+    position: absolute;
+    bottom: 1em;
+    cursor: pointer;
+}
+
+.next {
+    right: 1em;
+}
+
+.prev {
+    left: 1em;
+}
+
+#page1 { z-index: 10; }
+
+#checkbox-cover:checked ~ .book {
+    transform: translateX(200px);
+}
+
+#checkbox-cover:checked ~ .book .cover {
+    transition: transform 1.5s, z-index 0.5s 0.5s;
+    transform: rotateY(-180deg);
+    z-index: 1;
+}
+
+#checkbox-cover:checked ~ .book .page {
+    box-shadow: 0 0 3px rgb(99, 98, 98);
+}
+
+
+/* Flipping and stacking each page properly */
+#checkbox-page1:checked ~ .book #page1 {
+    transform: rotateY(-180deg);
+    z-index: 11;
+}
